@@ -1,6 +1,9 @@
-let tries = 0;
-let userInput = prompt("Choose rock, paper, or scissors").toLowerCase;
 let computerAnswer;
+let userInput;
+
+function getUserInput() {
+  userInput = prompt("Choose rock, paper, or scissors");
+}
 
 function generateRockPaperScissors() {
   let randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -14,9 +17,25 @@ function generateRockPaperScissors() {
   return computerAnswer;
 }
 
+getUserInput();
 generateRockPaperScissors();
 
-if (userInput == computerAnswer) {
-  tries += 1;
+while (userInput == computerAnswer) {
+  alert("it's a tie go again!");
+  getUserInput();
+  generateRockPaperScissors();
 }
-console.log(tries);
+
+if (userInput == "rock" && computerAnswer == "paper") {
+  alert("you lost");
+} else if (userInput == "rock" && computerAnswer == "scissors") {
+  alert("you won!");
+} else if (userInput == "paper" && computerAnswer == "rock") {
+  alert("you won!");
+} else if (userInput == "paper" && computerAnswer == "scissors") {
+  alert("you lost");
+} else if (userInput == "scissors" && computerAnswer == "rock") {
+  alert("you lost");
+} else if (userInput == "scissors" && computerAnswer == "paper") {
+  alert("you won!");
+}
