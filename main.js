@@ -1,5 +1,7 @@
 let computerAnswer;
 let userInput;
+let userScore = 0;
+let computerScore = 0;
 
 function getUserInput() {
   userInput = prompt("Choose rock, paper, or scissors");
@@ -26,16 +28,18 @@ while (userInput == computerAnswer) {
   generateRockPaperScissors();
 }
 
-if (userInput == "rock" && computerAnswer == "paper") {
-  alert("you lost");
-} else if (userInput == "rock" && computerAnswer == "scissors") {
-  alert("you won!");
-} else if (userInput == "paper" && computerAnswer == "rock") {
-  alert("you won!");
-} else if (userInput == "paper" && computerAnswer == "scissors") {
-  alert("you lost");
-} else if (userInput == "scissors" && computerAnswer == "rock") {
-  alert("you lost");
-} else if (userInput == "scissors" && computerAnswer == "paper") {
-  alert("you won!");
+function getWinner() {
+  if (userInput == "rock" && computerAnswer == "paper") {
+    alert("you lost");
+  } else if (userInput == "rock" && computerAnswer == "scissors") {
+    alert("you won!");
+  } else if (userInput == "paper" && computerAnswer == "rock") {
+    alert("you won!");
+  } else if (userInput == "paper" && computerAnswer == "scissors") {
+    alert("you lost");
+  } else if (userInput == "scissors" && computerAnswer == "rock") {
+    alert("you lost");
+  } else if (userInput == "scissors" && computerAnswer == "paper") {
+    alert("you won!");
+  }
 }
