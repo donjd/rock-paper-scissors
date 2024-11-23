@@ -1,5 +1,5 @@
-let computerAnswer;
-let userInput;
+let computerAnswer = "";
+let userInput = "";
 let userScore = 0;
 let computerScore = 0;
 
@@ -7,7 +7,7 @@ function getUserInput() {
   userInput = prompt("Choose rock, paper, or scissors");
 }
 
-function generateRockPaperScissors() {
+function getComputerAnswer() {
   let randomNumber = Math.floor(Math.random() * 3) + 1;
   if (randomNumber == 1) {
     computerAnswer = "rock";
@@ -19,27 +19,37 @@ function generateRockPaperScissors() {
   return computerAnswer;
 }
 
-getUserInput();
-generateRockPaperScissors();
+function getWinner() {
+  let roundResult = `You: ${userInput}, Computer: ${computerAnswer}`;
+  let totalScore = `You: ${userScore}, Computer: ${computerScore}`;
 
-while (userInput == computerAnswer) {
-  alert("it's a tie go again!");
-  getUserInput();
-  generateRockPaperScissors();
+  if (userInput == "rock" && computerAnswer == "paper") {
+    computerScore++;
+    alert(`you lost. Round Result: ${roundResult}, Total Score: ${totalScore}`);
+  } else if (userInput == "rock" && computerAnswer == "scissors") {
+    userScore++;
+    alert(`you won! Round Result: ${roundResult}, Total Score: ${totalScore}`);
+  } else if (userInput == "paper" && computerAnswer == "rock") {
+    userScore++;
+    alert(`you won! Round Result: ${roundResult}, Total Score: ${totalScore}`);
+  } else if (userInput == "paper" && computerAnswer == "scissors") {
+    computerScore++;
+    alert(`you lost. Round Result: ${roundResult}, Total Score: ${totalScore}`);
+  } else if (userInput == "scissors" && computerAnswer == "rock") {
+    computerScore++;
+    alert(`you lost. Round Result: ${roundResult}, Total Score: ${totalScore}`);
+  } else if (userInput == "scissors" && computerAnswer == "paper") {
+    userScore++;
+    alert(`you won! Round Result: ${roundResult}, Total Score: ${totalScore}`);
+  } else if (userInput == computerAnswer) {
+    alert(
+      `It's a tie, go again! Round Result: ${roundResult}, Total Score: ${totalScore}`
+    );
+  }
 }
 
-function getWinner() {
-  if (userInput == "rock" && computerAnswer == "paper") {
-    alert("you lost");
-  } else if (userInput == "rock" && computerAnswer == "scissors") {
-    alert("you won!");
-  } else if (userInput == "paper" && computerAnswer == "rock") {
-    alert("you won!");
-  } else if (userInput == "paper" && computerAnswer == "scissors") {
-    alert("you lost");
-  } else if (userInput == "scissors" && computerAnswer == "rock") {
-    alert("you lost");
-  } else if (userInput == "scissors" && computerAnswer == "paper") {
-    alert("you won!");
-  }
+for (i = 0; i < 10; i++) {
+  getUserInput();
+  getComputerAnswer();
+  getWinner();
 }
