@@ -89,12 +89,12 @@ function playRound() {
   }
 }
 
-function playGame() {
-  for (i = 0; i < 5; i++) {
-    getHumanChoice();
-    getComputerChoice();
-    playRound();
-  }
+// function playGame() {
+//   for (i = 0; i < 5; i++) {
+//     getHumanChoice();
+//     getComputerChoice();
+//     playRound();
+//   }
 
   if (humanScore > computerScore) {
     alert(`You won! The final score was ${humanScore}:${computerScore}`);
