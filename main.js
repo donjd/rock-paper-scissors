@@ -1,108 +1,36 @@
-let humanChoice = "";
-let computerChoice = "";
+const commandLine = document.querySelector(".command-line");
 
-let humanScore = 0;
-let computerScore = 0;
+function runUserCommand() {
+  const createNewLine = function (e) {
+    if (e.key == "Enter") {
+      const inputSection = document.createElement("div");
+      const prompt = document.createElement("p");
+      const userInput = document.createElement("input");
 
-function getHumanChoice() {
-  humanChoice = prompt("Choose rock, paper, or scissors");
-  humanChoice = humanChoice.toLowerCase();
+      userInput.setAttribute("type", "text");
+
+      inputSection.setAttribute(
+        "style",
+        "display: flex; gap: 10px; align-items: center;"
+      );
+      prompt.textContent = "user:~/rock-paper-scissors$";
+      prompt.setAttribute("style", "flex: 0 0 auto;");
+
+      userInput.setAttribute("style", "flex: 1 1 auto;");
+
+      inputSection.appendChild(prompt);
+      inputSection.appendChild(userInput);
+      commandLine.appendChild(inputSection);
+
+      userInput.focus();
+
+      userInput.addEventListener("keydown", createNewLine);
+    }
+  };
+
+  const initialInput = document.querySelector(".initialInput");
+
+  initialInput.addEventListener("keydown", createNewLine);
 }
 
-function getComputerChoice() {
-  let randomNumber = Math.floor(Math.random() * 3) + 1;
-  if (randomNumber == 1) {
-    computerChoice = "rock";
-  } else if (randomNumber == 2) {
-    computerChoice = "paper";
-  } else {
-    computerChoice = "scissors";
-  }
-  return computerChoice;
-}
-
-function playRound() {
-  switch (humanChoice) {
-    case "rock":
-      switch (computerChoice) {
-        case humanChoice:
-          alert(
-            `It's a tie! You chose: ${humanChoice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`
-          );
-          break;
-        case "paper":
-          computerScore++;
-          alert(
-            `You lost! You chose: ${humanChoice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`
-          );
-          break;
-        case "scissors":
-          humanScore++;
-          alert(
-            `You won! You chose: ${humanChoice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`
-          );
-          break;
-      }
-      break;
-    case "paper":
-      switch (computerChoice) {
-        case humanChoice:
-          alert(
-            `It's a tie! You chose: ${humanChoice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`
-          );
-          break;
-        case "rock":
-          humanScore++;
-          alert(
-            `You won! You chose: ${humanChoice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`
-          );
-          break;
-        case "scissors":
-          computerScore++;
-          alert(
-            `You lost! You chose: ${humanChoice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`
-          );
-          break;
-      }
-      break;
-    case "scissors":
-      switch (computerChoice) {
-        case humanChoice:
-          alert(
-            `It's a tie! You chose: ${humanChoice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`
-          );
-          break;
-        case "rock":
-          computerScore++;
-          alert(
-            `You lost! You chose: ${humanChoice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`
-          );
-          break;
-        case "paper":
-          humanScore++;
-          alert(
-            `You won! You chose: ${humanChoice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`
-          );
-          break;
-      }
-      break;
-  }
-}
-
-// function playGame() {
-//   for (i = 0; i < 5; i++) {
-//     getHumanChoice();
-//     getComputerChoice();
-//     playRound();
-//   }
-
-  if (humanScore > computerScore) {
-    alert(`You won! The final score was ${humanScore}:${computerScore}`);
-  } else if (computerScore > humanScore) {
-    alert(`You lost! The final score was ${humanScore}:${computerScore}`);
-  } else {
-    alert(`You tied! The final score was ${humanScore}:${computerScore}`);
-  }
-}
-
-playGame();
+runUserCommand();

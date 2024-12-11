@@ -4,13 +4,13 @@
 
 html {
     font-size: 10px;
-    font-family: monospace, Helvetica, Arial, sans-serif;
 }
 
-h1, h3, p {
+* {
     font-size: 1.5rem;
     color: rgba(97, 255, 97, 0.705);
-
+    font-weight: normal;
+    font-family: monospace, Helvetica, Arial, sans-serif;
 }
 
 
@@ -19,41 +19,39 @@ body {
     display: flex;
     flex-direction: column;
     margin: 50px;
-    background-color: #181d1a;
+    background-color: #070f0b;
 }
 
-header {
-    /* border: 2px solid blue; */
-    height: 50px;
-    flex: 0 0 auto;
-    
-}
 
 main {
     display: flex;
-    width: 75%;
+    width: 100%;
     flex-direction: column;
     flex: 5 1 auto;
     /* align-items: center; */
     border-radius: 10px;
 }
 
-.buttons {
+input{
+    background-color: #070f0b;
+    border: none;
+    width: 5vw;
+}
+
+input:focus{
+    border: none;
+    outline: none;
+}
+
+.inputSection {
     display: flex;
-    gap: 30px;
+    gap: 10px;
+    align-items: center;
 }
 
-
-button {
-    padding: 10px 20px;
-    border: 1px solid gray;
-    border-radius: 10px;
-}
-
-
-
-
-footer {
-    height: 50px;
+.inputSection p {
     flex: 0 0 auto;
 }
+
+.input input {
+flex: 1 1 auto;}
