@@ -35,7 +35,7 @@ main {
 input{
     background-color: #070f0b;
     border: none;
-    width: 5vw;
+    width: 90vw;
 }
 
 input:focus{
@@ -43,7 +43,7 @@ input:focus{
     outline: none;
 }
 
-.inputSection {
+.promptSection {
     display: flex;
     gap: 10px;
     align-items: center;
