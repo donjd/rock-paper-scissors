@@ -3,7 +3,7 @@ const commandLine = document.querySelector(".command-line");
 let command = "";
 let commandOutput = "";
 
-//Event delegation
+//event delegation
 commandLine.addEventListener("keyup", addNewLines);
 
 function addNewLines(e) {
