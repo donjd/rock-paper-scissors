@@ -1,8 +1,11 @@
 const commandLine = document.querySelector(".command-line");
 const initialInput = document.querySelector("#initialInput");
 let userInput = initialInput;
+const commands = [];
 
-initialInput.addEventListener("keyup", (e) => {
+initialInput.addEventListener("keyup", addNewLines);
+
+function addNewLines(e) {
   if (e.key == "Enter") {
     //output parent
     const inputSection = document.createElement("div");
@@ -26,7 +29,7 @@ initialInput.addEventListener("keyup", (e) => {
     inputSection.setAttribute("style", "display");
 
     //adding content
-    output.textContent = runCommands(userInput.value);
+    output.textContent = runCommands(commands.at(-1));
     prompt.textContent = "user:~/rock-paper-scissors$";
 
     inputSection.appendChild(output);
@@ -35,12 +38,12 @@ initialInput.addEventListener("keyup", (e) => {
     promptSection.appendChild(input);
     commandLine.appendChild(inputSection);
   }
-});
+}
 
 function runCommands(cmd) {
   switch (cmd) {
     case "rps --help":
-      console.log("this worke yo");
+      console.log("this worked yo");
       break;
     case "rps rock":
       console.log("rocks");
