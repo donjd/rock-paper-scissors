@@ -42,6 +42,10 @@ function addNewLines(e) {
     promptSection.appendChild(prompt);
     promptSection.appendChild(input);
     commandLine.appendChild(inputSection);
+
+    input.focus();
+
+    input.addEventListener("keyup", addNewLines);
   }
 
   // input.addEventListener("keyup", addNewLines);
