@@ -52,6 +52,8 @@ let computerChoice = "";
 
 let humanScore = 0;
 let computerScore = 0;
+let roundCounter = 0;
+let gameStarted = true;
 
 function runCommands(cmd) {
   switch (cmd) {
@@ -65,7 +67,7 @@ function runCommands(cmd) {
       `;
       break;
     case "rps new":
-      playGame();
+      roundCounter = 0;
       commandOutput = `A new game has started.`;
       break;
     case "rps score":
@@ -75,6 +77,7 @@ function runCommands(cmd) {
       commandOutput = `Clear the screen without resetting the score`;
       break;
     case "rps rock":
+      roundCounter++;
       switch (computerChoice) {
         case "rock":
           commandOutput = `It's a tie! You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
@@ -90,6 +93,7 @@ function runCommands(cmd) {
       }
       break;
     case "rps paper":
+      roundCounter++;
       switch (computerChoice) {
         case "paper":
           commandOutput = `It's a tie! You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
@@ -105,6 +109,7 @@ function runCommands(cmd) {
       }
       break;
     case "rps scissors":
+      roundCounter++;
       switch (computerChoice) {
         case "scissors":
           commandOutput = `It's a tie! You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
@@ -133,10 +138,4 @@ function getComputerChoice() {
     computerChoice = "scissors";
   }
   return computerChoice;
-}
-
-function playGame() {
-  for (i = 0; i < 5; i++) {
-    getComputerChoice();
-  }
 }
