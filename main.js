@@ -59,7 +59,7 @@ function runCommands(cmd) {
       `;
       break;
     case "rps new":
-      commandOutput = `Game has restarted.`;
+      commandOutput = `Here is your new game.`;
       break;
     case "rps score":
       commandOutput = `The score is -- You: 0, Computer: 0`;
