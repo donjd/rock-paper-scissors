@@ -47,6 +47,12 @@ function addNewLines(e) {
   }
 }
 
+//game code
+let computerChoice = "";
+
+let humanScore = 0;
+let computerScore = 0;
+
 function runCommands(cmd) {
   switch (cmd) {
     case "rps --help":
@@ -59,25 +65,78 @@ function runCommands(cmd) {
       `;
       break;
     case "rps new":
-      commandOutput = `Here is your new game.`;
+      playGame();
+      commandOutput = `A new game has started.`;
       break;
     case "rps score":
-      commandOutput = `The score is -- You: 0, Computer: 0`;
+      commandOutput = `Your Score: ${humanScore}, Computer Score: ${computerScore}`;
       break;
     case "rps clear":
       commandOutput = `Clear the screen without resetting the score`;
       break;
     case "rps rock":
-      commandOutput = `You have chosen rock. The computer chose...`;
+      switch (computerChoice) {
+        case "rock":
+          commandOutput = `It's a tie! You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+          break;
+        case "paper":
+          computerScore++;
+          commandOutput = `You lost! You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+          break;
+        case "scissors":
+          humanScore++;
+          commandOutput = `You won! You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+          break;
+      }
       break;
     case "rps paper":
-      commandOutput = `You have chosen paper. The computer chose...`;
+      switch (computerChoice) {
+        case "paper":
+          commandOutput = `It's a tie! You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+          break;
+        case "rock":
+          humanScore++;
+          commandOutput = `You won! You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+          break;
+        case "scissors":
+          computerScore++;
+          commandOutput = `You lost! You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+          break;
+      }
       break;
     case "rps scissors":
-      commandOutput = `You have chosen scissors. The computer chose...`;
-      break;
-    default:
-      commandOutput = `Please enter a valid command.`;
-      break;
+      switch (computerChoice) {
+        case "scissors":
+          commandOutput = `It's a tie! You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+          break;
+        case "rock":
+          computerScore++;
+          commandOutput = `You lost! You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+          break;
+        case "paper":
+          humanScore++;
+          commandOutput = `You won! You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+          break;
+        default:
+          commandOutput = `Please enter a valid command.`;
+      }
+  }
+}
+
+function getComputerChoice() {
+  let randomNumber = Math.floor(Math.random() * 3) + 1;
+  if (randomNumber == 1) {
+    computerChoice = "rock";
+  } else if (randomNumber == 2) {
+    computerChoice = "paper";
+  } else {
+    computerChoice = "scissors";
+  }
+  return computerChoice;
+}
+
+function playGame() {
+  for (i = 0; i < 5; i++) {
+    getComputerChoice();
   }
 }
