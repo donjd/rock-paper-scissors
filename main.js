@@ -1,10 +1,10 @@
 const commandLine = document.querySelector(".command-line");
-const initialInput = document.querySelector("#initialInput");
-let userInput = initialInput;
+
 let command = "";
 let commandOutput = "";
 
-initialInput.addEventListener("keyup", addNewLines);
+//Event delegation
+commandLine.addEventListener("keyup", addNewLines);
 
 function addNewLines(e) {
   if (e.key == "Enter") {
@@ -44,11 +44,7 @@ function addNewLines(e) {
     commandLine.appendChild(inputSection);
 
     input.focus();
-
-    input.addEventListener("keyup", addNewLines);
   }
-
-  // input.addEventListener("keyup", addNewLines);
 }
 
 function runCommands(cmd) {
