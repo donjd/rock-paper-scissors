@@ -2,7 +2,7 @@ const commandLine = document.querySelector(".command-line");
 const initialInput = document.querySelector("#initialInput");
 let userInput = initialInput;
 let command = "";
-let commandResult = "";
+let commandOutput = "";
 
 initialInput.addEventListener("keyup", addNewLines);
 
@@ -34,7 +34,7 @@ function addNewLines(e) {
     //adding content
     command = e.target.value;
     runCommands(command);
-    output.textContent = commandResult;
+    output.textContent = commandOutput;
     prompt.textContent = "user:~/rock-paper-scissors$";
 
     inputSection.appendChild(output);
@@ -50,19 +50,34 @@ function addNewLines(e) {
 function runCommands(cmd) {
   switch (cmd) {
     case "rps --help":
-      commandResult = `
-      rps score = returns the current score\n
-      rps rock/paper/scissors = chooses weapon\n
-      rps new = starts a new game with reset score\n
-      rps --help = returns a list of the available commands\n
-      rps clear = clears the screen if too messy\n
+      commandOutput = `
+      rps new = starts a new game with reset score;
+      rps score = returns the current score;
+      rps rock/paper/scissors = chooses weapon;
+      rps --help = returns a list of the available commands;
+      rps clear = clears the screen but does not reset game;
       `;
       break;
     case "rps new":
-      commandResult = `Game has restarted.`;
+      commandOutput = `Game has restarted.`;
+      break;
+    case "rps score":
+      commandOutput = `The score is -- You: 0, Computer: 0`;
       break;
     case "rps clear":
-      commandResult = `Clear the screen without resetting the score`;
+      commandOutput = `Clear the screen without resetting the score`;
+      break;
+    case "rps rock":
+      commandOutput = `You have chosen rock. The computer chose...`;
+      break;
+    case "rps paper":
+      commandOutput = `You have chosen paper. The computer chose...`;
+      break;
+    case "rps scissors":
+      commandOutput = `You have chosen scissors. The computer chose...`;
+      break;
+    default:
+      commandOutput = `Please enter a valid command.`;
       break;
   }
 }
