@@ -56,6 +56,7 @@ let humanScore = 0;
 let computerScore = 0;
 let roundCounter = 0;
 let gameStarted = false;
+// let roundResult = "";
 
 function ifGameEnded() {
   if (gameStarted == true && roundCounter == 5) {
@@ -66,12 +67,53 @@ function ifGameEnded() {
   }
 }
 
-function roundResult() {
-  switch (true) {
-    case command == "rps rock" && computerChoice == "scissors":
+function showRoundResultMessage(roundResult) {
+  let choice = "";
+
+  function showGameResultMessage() {
+    if (humanScore > computerScore) {
+      commandOutput = `The game is over and you won! The final score was ${humanScore} : ${computerScore}`;
+    } else if (humanScore < computerScore) {
+      commandOutput = `The game is over and you lost. The final score was ${humanScore} : ${computerScore}`;
+    } else {
+      commandOutput = `The game is over and it was a tie. The final score was ${humanScore} : ${computerScore}`;
+    }
+  }
+
+  switch (command) {
+    case "rps rock":
+      choice = "Rock";
+      break;
+    case "rps paper":
+      choice = "Paper";
+      break;
+    case "rps scissors":
+      choice = "Scissors";
       break;
   }
-  commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+  switch (roundResult) {
+    case "won":
+      if (roundCounter == 5) {
+        showGameResultMessage();
+      } else {
+        commandOutput = `Round ${roundCounter} result: You won! You chose: ${choice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+      }
+      break;
+    case "lost":
+      if (roundCounter == 5) {
+        showGameResultMessage();
+      } else {
+        commandOutput = `Round ${roundCounter} result: You lost. You chose: ${choice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+      }
+      break;
+    case "tied":
+      if (roundCounter == 5) {
+        showGameResultMessage();
+      } else {
+        commandOutput = `Round ${roundCounter} result: It was a tie. You chose: ${choice}, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+      }
+      break;
+  }
 }
 
 function runCommands(cmd) {
@@ -100,19 +142,20 @@ function runCommands(cmd) {
       if (gameStarted == true && roundCounter < 5) {
         roundCounter++;
         switch (computerChoice) {
-          case "rock":
-            commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+          case "Rock":
+            showRoundResultMessage("tied");
             break;
-          case "paper":
+          case "Paper":
             computerScore++;
-            commandOutput = `Round ${roundCounter} result: You lost. You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            showRoundResultMessage("lost");
             break;
-          case "scissors":
+          case "Scissors":
             humanScore++;
-            commandOutput = `Round ${roundCounter} result: You won! You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            showRoundResultMessage("won");
             break;
         }
       }
+
       break;
     case "rps paper":
       ifGameEnded();
@@ -120,16 +163,16 @@ function runCommands(cmd) {
       if (gameStarted == true && roundCounter < 5) {
         roundCounter++;
         switch (computerChoice) {
-          case "paper":
-            commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-            break;
-          case "rock":
+          case "Rock":
             humanScore++;
-            commandOutput = `Round ${roundCounter} result: You won! You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            showRoundResultMessage("won");
             break;
-          case "scissors":
+          case "Paper":
+            showRoundResultMessage("tied");
+            break;
+          case "Scissors":
             computerScore++;
-            commandOutput = `Round ${roundCounter} result: You lost. You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            showRoundResultMessage("lost");
             break;
         }
       }
@@ -140,16 +183,16 @@ function runCommands(cmd) {
       if (gameStarted == true && roundCounter < 5) {
         roundCounter++;
         switch (computerChoice) {
-          case "scissors":
-            commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-            break;
-          case "rock":
+          case "Rock":
             computerScore++;
-            commandOutput = `Round ${roundCounter} result: You lost. You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            showRoundResultMessage("lost");
             break;
-          case "paper":
+          case "Paper":
             humanScore++;
-            commandOutput = `Round ${roundCounter} result: You won! You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            showRoundResultMessage("won");
+            break;
+          case "Scissors":
+            showRoundResultMessage("tied");
             break;
         }
       }
@@ -163,11 +206,11 @@ function runCommands(cmd) {
 function getComputerChoice() {
   let randomNumber = Math.floor(Math.random() * 3) + 1;
   if (randomNumber == 1) {
-    computerChoice = "rock";
+    computerChoice = "Rock";
   } else if (randomNumber == 2) {
-    computerChoice = "paper";
+    computerChoice = "Paper";
   } else {
-    computerChoice = "scissors";
+    computerChoice = "Scissors";
   }
   return computerChoice;
 }
