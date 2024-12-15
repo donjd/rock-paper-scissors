@@ -61,7 +61,17 @@ function ifGameEnded() {
   if (gameStarted == true && roundCounter == 5) {
     gameStarted = false;
     commandOutput = `The game has ended. Type 'rps new' to start a new game.`;
+  } else if (gameStarted == false && roundCounter < 5) {
+    commandOutput = `The game hasn't started yet. Type 'rps new' to begin.`;
   }
+}
+
+function roundResult() {
+  switch (true) {
+    case command == "rps rock" && computerChoice == "scissors":
+      break;
+  }
+  commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
 }
 
 function runCommands(cmd) {
@@ -72,7 +82,6 @@ function runCommands(cmd) {
       rps score = returns the current score;
       rps rock/paper/scissors = chooses weapon;
       rps --help = returns a list of the available commands;
-      rps clear = clears the screen but does not reset game;
       `;
       break;
     case "rps new":
@@ -81,83 +90,67 @@ function runCommands(cmd) {
       computerScore = 0;
       gameStarted = true;
       commandOutput = `A new game has started. Choose your weapon.`;
-
       break;
     case "rps score":
       commandOutput = `Your Score: ${humanScore}, Computer Score: ${computerScore}`;
       break;
-    case "rps clear":
-      commandOutput = `Clear the screen without resetting the score`;
-      break;
     case "rps rock":
       ifGameEnded();
       getComputerChoice();
-      if (gameStarted == false) {
-        commandOutput = `The game hasn't started yet. Type 'rps new' to begin.`;
-      } else {
-        if (roundCounter < 5) {
-          roundCounter++;
-          switch (computerChoice) {
-            case "rock":
-              commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-              break;
-            case "paper":
-              computerScore++;
-              commandOutput = `Round ${roundCounter} result: You lost. You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-              break;
-            case "scissors":
-              humanScore++;
-              commandOutput = `Round ${roundCounter} result: You won! You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-              break;
-          }
+      if (gameStarted == true && roundCounter < 5) {
+        roundCounter++;
+        switch (computerChoice) {
+          case "rock":
+            commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            break;
+          case "paper":
+            computerScore++;
+            commandOutput = `Round ${roundCounter} result: You lost. You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            break;
+          case "scissors":
+            humanScore++;
+            commandOutput = `Round ${roundCounter} result: You won! You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            break;
         }
       }
       break;
     case "rps paper":
       ifGameEnded();
       getComputerChoice();
-      if (gameStarted == false) {
-        commandOutput = `The game hasn't started yet. Type 'rps new' to begin.`;
-      } else {
-        if (roundCounter < 5) {
-          roundCounter++;
-          switch (computerChoice) {
-            case "paper":
-              commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-              break;
-            case "rock":
-              humanScore++;
-              commandOutput = `Round ${roundCounter} result: You won! You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-              break;
-            case "scissors":
-              computerScore++;
-              commandOutput = `Round ${roundCounter} result: You lost. You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-              break;
-          }
+      if (gameStarted == true && roundCounter < 5) {
+        roundCounter++;
+        switch (computerChoice) {
+          case "paper":
+            commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            break;
+          case "rock":
+            humanScore++;
+            commandOutput = `Round ${roundCounter} result: You won! You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            break;
+          case "scissors":
+            computerScore++;
+            commandOutput = `Round ${roundCounter} result: You lost. You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            break;
         }
       }
       break;
     case "rps scissors":
       ifGameEnded();
       getComputerChoice();
-      if (gameStarted == false) {
-        commandOutput = `The game hasn't started yet. Type 'rps new' to begin.`;
-      } else {
-        if (roundCounter < 5) {
-          roundCounter++;
-          switch (computerChoice) {
-            case "scissors":
-              commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-              break;
-            case "rock":
-              computerScore++;
-              commandOutput = `Round ${roundCounter} result: You lost. You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-              break;
-            case "paper":
-              humanScore++;
-              commandOutput = `Round ${roundCounter} result: You won! You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
-              break;
-          }
+      if (gameStarted == true && roundCounter < 5) {
+        roundCounter++;
+        switch (computerChoice) {
+          case "scissors":
+            commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            break;
+          case "rock":
+            computerScore++;
+            commandOutput = `Round ${roundCounter} result: You lost. You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            break;
+          case "paper":
+            humanScore++;
+            commandOutput = `Round ${roundCounter} result: You won! You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+            break;
         }
       }
       break;
