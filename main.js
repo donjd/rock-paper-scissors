@@ -61,6 +61,13 @@ let computerScore = 0;
 let roundCounter = 0;
 let gameStarted = false;
 
+function ifGameEnded() {
+  if (gameStarted == true && roundCounter == 5) {
+    gameStarted = false;
+    commandOutput = `The game has ended. Type 'rps new' to start a new game.`;
+  }
+}
+
 function runCommands(cmd) {
   switch (cmd) {
     case "rps --help":
@@ -87,6 +94,7 @@ function runCommands(cmd) {
       commandOutput = `Clear the screen without resetting the score`;
       break;
     case "rps rock":
+      ifGameEnded();
       getComputerChoice();
       if (gameStarted == false) {
         commandOutput = `The game hasn't started yet. Type 'rps new' to begin.`;
@@ -110,6 +118,7 @@ function runCommands(cmd) {
       }
       break;
     case "rps paper":
+      ifGameEnded();
       getComputerChoice();
       if (gameStarted == false) {
         commandOutput = `The game hasn't started yet. Type 'rps new' to begin.`;
@@ -133,6 +142,7 @@ function runCommands(cmd) {
       }
       break;
     case "rps scissors":
+      ifGameEnded();
       getComputerChoice();
       if (gameStarted == false) {
         commandOutput = `The game hasn't started yet. Type 'rps new' to begin.`;
@@ -154,8 +164,10 @@ function runCommands(cmd) {
           }
         }
       }
+      break;
     default:
       commandOutput = `Please enter a valid command.`;
+      break;
   }
 }
 
