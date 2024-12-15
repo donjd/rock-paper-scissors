@@ -8,19 +8,15 @@ commandLine.addEventListener("keyup", addNewLine);
 
 function addNewLine(e) {
   if (e.key == "Enter") {
-    //output parent
     const inputSection = document.createElement("div");
     inputSection.classList.add("inputSection");
 
-    //output children
     const output = document.createElement("p");
     output.classList.add("output");
 
-    //prompt section parent
     const promptSection = document.createElement("div");
     promptSection.classList.add("promptSection");
 
-    //prompt section children
     const prompt = document.createElement("p");
     prompt.classList.add("prompt");
     const input = document.createElement("input");
