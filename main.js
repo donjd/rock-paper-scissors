@@ -3,10 +3,10 @@ const commandLine = document.querySelector(".command-line");
 let command = "";
 let commandOutput = "";
 
-//event delegation
-commandLine.addEventListener("keyup", addNewLines);
+//Event delegation
+commandLine.addEventListener("keyup", addNewLine);
 
-function addNewLines(e) {
+function addNewLine(e) {
   if (e.key == "Enter") {
     //output parent
     const inputSection = document.createElement("div");
@@ -28,9 +28,6 @@ function addNewLines(e) {
     input.setAttribute("type", "text");
     input.setAttribute("autocomplete", "off");
 
-    //styling
-    inputSection.setAttribute("style", "display");
-
     //adding content
     command = e.target.value;
     runCommands(command);
@@ -44,6 +41,30 @@ function addNewLines(e) {
     commandLine.appendChild(inputSection);
 
     input.focus();
+
+    //another way to do this last part would be to get rid of event delegation,
+    //set the initial eventListener to the initial-input ID,
+    //add a const called latestInput, focus that, removeEventListener
+    //from e.target, and add a new eventListener to latestInput. I have a feeling
+    //though that removing the event listener AND disabling the element
+    // would be better so that the user isn't as easily able to go into the
+    //html file and change disabled to false.
+    e.target.setAttribute("disabled", "true");
+  }
+}
+
+//game code
+let computerChoice = "";
+
+let humanScore = 0;
+let computerScore = 0;
+let roundCounter = 0;
+let gameStarted = false;
+
+function ifGameEnded() {
+  if (gameStarted == true && roundCounter == 5) {
+    gameStarted = false;
+    commandOutput = `The game has ended. Type 'rps new' to start a new game.`;
   }
 }
 
@@ -59,25 +80,105 @@ function runCommands(cmd) {
       `;
       break;
     case "rps new":
-      commandOutput = `Here is your new game.`;
+      roundCounter = 0;
+      humanScore = 0;
+      computerScore = 0;
+      gameStarted = true;
+      commandOutput = `A new game has started. Choose your weapon.`;
+
       break;
     case "rps score":
-      commandOutput = `The score is -- You: 0, Computer: 0`;
+      commandOutput = `Your Score: ${humanScore}, Computer Score: ${computerScore}`;
       break;
     case "rps clear":
       commandOutput = `Clear the screen without resetting the score`;
       break;
     case "rps rock":
-      commandOutput = `You have chosen rock. The computer chose...`;
+      ifGameEnded();
+      getComputerChoice();
+      if (gameStarted == false) {
+        commandOutput = `The game hasn't started yet. Type 'rps new' to begin.`;
+      } else {
+        if (roundCounter < 5) {
+          roundCounter++;
+          switch (computerChoice) {
+            case "rock":
+              commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+              break;
+            case "paper":
+              computerScore++;
+              commandOutput = `Round ${roundCounter} result: You lost. You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+              break;
+            case "scissors":
+              humanScore++;
+              commandOutput = `Round ${roundCounter} result: You won! You chose: Rock, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+              break;
+          }
+        }
+      }
       break;
     case "rps paper":
-      commandOutput = `You have chosen paper. The computer chose...`;
+      ifGameEnded();
+      getComputerChoice();
+      if (gameStarted == false) {
+        commandOutput = `The game hasn't started yet. Type 'rps new' to begin.`;
+      } else {
+        if (roundCounter < 5) {
+          roundCounter++;
+          switch (computerChoice) {
+            case "paper":
+              commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+              break;
+            case "rock":
+              humanScore++;
+              commandOutput = `Round ${roundCounter} result: You won! You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+              break;
+            case "scissors":
+              computerScore++;
+              commandOutput = `Round ${roundCounter} result: You lost. You chose: Paper, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+              break;
+          }
+        }
+      }
       break;
     case "rps scissors":
-      commandOutput = `You have chosen scissors. The computer chose...`;
+      ifGameEnded();
+      getComputerChoice();
+      if (gameStarted == false) {
+        commandOutput = `The game hasn't started yet. Type 'rps new' to begin.`;
+      } else {
+        if (roundCounter < 5) {
+          roundCounter++;
+          switch (computerChoice) {
+            case "scissors":
+              commandOutput = `Round ${roundCounter} result: It's a tie. You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+              break;
+            case "rock":
+              computerScore++;
+              commandOutput = `Round ${roundCounter} result: You lost. You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+              break;
+            case "paper":
+              humanScore++;
+              commandOutput = `Round ${roundCounter} result: You won! You chose: Scissors, Computer chose: ${computerChoice}. Your Score: ${humanScore}, Computer Score: ${computerScore}`;
+              break;
+          }
+        }
+      }
       break;
     default:
       commandOutput = `Please enter a valid command.`;
       break;
   }
+}
+
+function getComputerChoice() {
+  let randomNumber = Math.floor(Math.random() * 3) + 1;
+  if (randomNumber == 1) {
+    computerChoice = "rock";
+  } else if (randomNumber == 2) {
+    computerChoice = "paper";
+  } else {
+    computerChoice = "scissors";
+  }
+  return computerChoice;
 }
