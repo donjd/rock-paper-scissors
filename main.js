@@ -72,11 +72,11 @@ function showRoundResultMessage(roundResult) {
 
   function showGameResultMessage() {
     if (humanScore > computerScore) {
-      commandOutput = `The game is over and you won! The final score was ${humanScore} : ${computerScore}`;
+      commandOutput = `The game is over and you won! You chose: ${choice}, Computer chose: ${computerChoice}. The final score was ${humanScore} : ${computerScore}`;
     } else if (humanScore < computerScore) {
-      commandOutput = `The game is over and you lost. The final score was ${humanScore} : ${computerScore}`;
+      commandOutput = `The game is over and you lost. You chose: ${choice}, Computer chose: ${computerChoice}. The final score was ${humanScore} : ${computerScore}`;
     } else {
-      commandOutput = `The game is over and it was a tie. The final score was ${humanScore} : ${computerScore}`;
+      commandOutput = `The game is over and it was a tie. You chose: ${choice}, Computer chose: ${computerChoice}. The final score was ${humanScore} : ${computerScore}`;
     }
   }
 
