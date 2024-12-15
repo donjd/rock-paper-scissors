@@ -4,9 +4,9 @@ let command = "";
 let commandOutput = "";
 
 //Event delegation
-commandLine.addEventListener("keyup", addNewLines);
+commandLine.addEventListener("keyup", addNewLine);
 
-function addNewLines(e) {
+function addNewLine(e) {
   if (e.key == "Enter") {
     //output parent
     const inputSection = document.createElement("div");
@@ -28,9 +28,6 @@ function addNewLines(e) {
     input.setAttribute("type", "text");
     input.setAttribute("autocomplete", "off");
 
-    //styling
-    inputSection.setAttribute("style", "display");
-
     //adding content
     command = e.target.value;
     runCommands(command);
@@ -44,6 +41,15 @@ function addNewLines(e) {
     commandLine.appendChild(inputSection);
 
     input.focus();
+
+    //another way to do this last part would be to get rid of event delegation,
+    //set the initial eventListener to the initial-input ID,
+    //add a const called latestInput, focus that, removeEventListener
+    //from e.target, and add a new eventListener to latestInput. I have a feeling
+    //though that removing the event listener AND disabling the element
+    // would be better so that the user isn't as easily able to go into the
+    //html file and change disabled to false.
+    e.target.setAttribute("disabled", "true");
   }
 }
 
